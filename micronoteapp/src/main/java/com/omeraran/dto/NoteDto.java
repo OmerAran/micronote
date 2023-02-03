@@ -1,13 +1,11 @@
 package com.omeraran.dto;
 
-import com.omeraran.model.User;
-
 public class NoteDto {
     private Long id;
     private String content;
-    private UserDto user;
+    private NoteUserDto user;
 
-    public NoteDto(Long id, String content, UserDto user) {
+    public NoteDto(Long id, String content, NoteUserDto user) {
         this.id = id;
         this.content = content;
         this.user = user;
@@ -29,11 +27,11 @@ public class NoteDto {
         this.content = content;
     }
 
-    public UserDto getUser() {
+    public NoteUserDto getUser() {
         return user;
     }
 
-    public void setUser(UserDto user) {
+    public void setUser(NoteUserDto user) {
         this.user = user;
     }
 }

@@ -6,17 +6,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class NoteDtoConverter {
-    private final UserDtoConverter userDtoConverter;
+    private final NoteUserDtoConverter noteUserDtoConverter;
 
-    public NoteDtoConverter(UserDtoConverter userDtoConverter) {
-        this.userDtoConverter = userDtoConverter;
+    public NoteDtoConverter(NoteUserDtoConverter noteUserDtoConverter) {
+        this.noteUserDtoConverter = noteUserDtoConverter;
     }
 
     public NoteDto converter(Note from){
         return new NoteDto(
                 from.getId(),
                 from.getContent(),
-                userDtoConverter.converter(from.getUser())
+                noteUserDtoConverter.converter(from.getUser())
         );
     }
 }

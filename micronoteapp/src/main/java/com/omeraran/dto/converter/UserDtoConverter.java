@@ -1,6 +1,5 @@
 package com.omeraran.dto.converter;
 
-import com.omeraran.dto.NoteDto;
 import com.omeraran.dto.UserDto;
 import com.omeraran.model.User;
 import org.springframework.stereotype.Component;
