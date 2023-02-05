@@ -4,8 +4,9 @@ import com.omeraran.dto.UserDto;
 import com.omeraran.dto.converter.UserDtoConverter;
 import com.omeraran.model.User;
 import com.omeraran.repository.UserRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -22,6 +23,14 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException());
         UserDto userDto = userDtoConverter.converter(user);
         return userDto;
+    }
+    public List<UserDto> getAllUsers(){
+        List<User> users = userRepository.findAll();
+        List<UserDto> userDtos = users
+                .stream()
+                .map(userDtoConverter::converter)
+                .collect(Collectors.toList());
+        return userDtos;
     }
 
     public UserDto saveOneUser(User user){

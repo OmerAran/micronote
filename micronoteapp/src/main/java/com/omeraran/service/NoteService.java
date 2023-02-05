@@ -7,6 +7,9 @@ import com.omeraran.model.Note;
 import com.omeraran.repository.NoteRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class NoteService {
 
@@ -18,6 +21,14 @@ public class NoteService {
         this.noteDtoConverter = noteDtoConverter;
     }
 
+    public List<NoteDto> getAllNotes() {
+        List<Note> notes = noteRepository.findAll();
+        List<NoteDto> noteDtos = notes
+                .stream()
+                .map(noteDtoConverter::converter)
+                .collect(Collectors.toList());
+        return noteDtos;
+    }
     public NoteDto getOneNote(Long id){
        Note note = noteRepository.findById(id).orElseThrow(()->new RuntimeException("Note not found with id : " + id));
        NoteDto noteDto = noteDtoConverter.converter(note);
@@ -41,4 +52,5 @@ public class NoteService {
     public void deleteOneNote(Long id){
         noteRepository.deleteById(id);
     }
+
 }
