@@ -15,8 +15,8 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Note> notes;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Note> notes;
 
     public User(Long id, String username, String password) {
         this.id = id;
@@ -53,11 +53,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Note> getNotes() {
+    public Set<Note> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<Note> notes) {
+    public void setNotes(Set<Note> notes) {
         this.notes = notes;
     }
 }
