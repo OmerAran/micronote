@@ -2,13 +2,14 @@ package com.omeraran.dto;
 
 
 import java.util.List;
+import java.util.Set;
 
 public class UserDto {
     private Long id;
     private String username;
-    private List<UserNoteDto> notes;
+    private Set<UserNoteDto> notes;
 
-    public UserDto(Long id, String username, List<UserNoteDto> notes) {
+    public UserDto(Long id, String username, Set<UserNoteDto> notes) {
         this.id = id;
         this.username = username;
         this.notes = notes;
@@ -30,11 +31,11 @@ public class UserDto {
         this.username = username;
     }
 
-    public List<UserNoteDto> getNotes() {
+    public Set<UserNoteDto> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<UserNoteDto> notes) {
+    public void setNotes(Set<UserNoteDto> notes) {
         this.notes = notes;
     }
 }

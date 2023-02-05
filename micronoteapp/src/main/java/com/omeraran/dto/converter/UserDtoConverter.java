@@ -21,7 +21,7 @@ public class UserDtoConverter {
                 from.getNotes()
                         .stream()
                         .map(userNoteDtoConverter::convert)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toSet())
 
         );
 
