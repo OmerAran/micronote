@@ -2,6 +2,7 @@ package com.omeraran.service;
 
 import com.omeraran.dto.UserDto;
 import com.omeraran.dto.converter.UserDtoConverter;
+import com.omeraran.exception.UserNotFoundException;
 import com.omeraran.model.User;
 import com.omeraran.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class UserService {
     }
 
     public UserDto getOneUser(Long id){
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("[getOneUser] SUDE FISTIK user not found with id: " + id));
         UserDto userDto = userDtoConverter.converter(user);
         return userDto;
     }
@@ -40,7 +41,7 @@ public class UserService {
     }
 
     public UserDto updateOneUser(User updatedUser){
-        User user = userRepository.findById(updatedUser.getId()).orElseThrow(()->new RuntimeException());
+        User user = userRepository.findById(updatedUser.getId()).orElseThrow(()->new UserNotFoundException("[updateOneUser] SUDE FINDIK user not found with id: "+ updatedUser.getId()));
         user.setUsername(updatedUser.getUsername());
         user.setPassword(updatedUser.getPassword());
         UserDto userDto = userDtoConverter.converter(userRepository.save(user));
