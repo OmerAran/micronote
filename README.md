@@ -1,7 +1,7 @@
 # micronote project
 
 This project is about taking notes. There is two type objects named user and note.
-I have tried to write an API which has relaitons between objects. I decided to write an app that need one.
+I have tried to write an API which has relaitons between objects. I decided to write an app that i need one.
 I have experienced RestAPI development, how to work with relationships between entities(one to many...), logic of DTOs and converters, Exception Handling. 
 
 ## API Reference
