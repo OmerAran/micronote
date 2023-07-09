@@ -5,6 +5,7 @@ import com.omeraran.dto.converter.UserDtoConverter;
 import com.omeraran.exception.UserNotFoundException;
 import com.omeraran.model.User;
 import com.omeraran.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +16,14 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserDtoConverter userDtoConverter;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, UserDtoConverter userDtoConverter) {
+    public UserService(UserRepository userRepository,
+                       UserDtoConverter userDtoConverter,
+                       PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userDtoConverter = userDtoConverter;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public UserDto getOneUser(Long id) {
@@ -39,6 +44,7 @@ public class UserService {
     }
 
     public UserDto saveOneUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
         UserDto userDto = userDtoConverter.converter(savedUser);
         return userDto;

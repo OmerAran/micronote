@@ -18,6 +18,7 @@ public class UserDtoConverter {
         return new UserDto(
                 from.getId(),
                 from.getUsername(),
+                from.getRole(),
                 from.getNotes()
                         .stream()
                         .map(userNoteDtoConverter::convert)
