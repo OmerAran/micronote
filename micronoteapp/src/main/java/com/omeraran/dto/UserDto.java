@@ -1,7 +1,5 @@
 package com.omeraran.dto;
 
-
-import java.util.List;
 import java.util.Set;
 
 public class UserDto {

@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserNoteDtoConverter {
-
-    public UserNoteDto convert(Note from){
+    public UserNoteDto convert(Note from) {
         return new UserNoteDto(
                 from.getId(),
                 from.getContent()

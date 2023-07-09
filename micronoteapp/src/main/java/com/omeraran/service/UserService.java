@@ -6,6 +6,7 @@ import com.omeraran.exception.UserNotFoundException;
 import com.omeraran.model.User;
 import com.omeraran.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,12 +21,15 @@ public class UserService {
         this.userDtoConverter = userDtoConverter;
     }
 
-    public UserDto getOneUser(Long id){
-        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("[getOneUser] SUDE FISTIK user not found with id: " + id));
+    public UserDto getOneUser(Long id) {
+        User user = userRepository
+                .findById(id)
+                .orElseThrow(() -> new UserNotFoundException("[getOneUser] user not found with id: " + id));
         UserDto userDto = userDtoConverter.converter(user);
         return userDto;
     }
-    public List<UserDto> getAllUsers(){
+
+    public List<UserDto> getAllUsers() {
         List<User> users = userRepository.findAll();
         List<UserDto> userDtos = users
                 .stream()
@@ -34,21 +38,26 @@ public class UserService {
         return userDtos;
     }
 
-    public UserDto saveOneUser(User user){
+    public UserDto saveOneUser(User user) {
         User savedUser = userRepository.save(user);
         UserDto userDto = userDtoConverter.converter(savedUser);
         return userDto;
     }
 
-    public UserDto updateOneUser(User updatedUser){
-        User user = userRepository.findById(updatedUser.getId()).orElseThrow(()->new UserNotFoundException("[updateOneUser] SUDE FINDIK user not found with id: "+ updatedUser.getId()));
+    public UserDto updateOneUser(User updatedUser) {
+
+        User user = userRepository
+                .findById(updatedUser.getId())
+                .orElseThrow(() -> new UserNotFoundException("[updateOneUser] user not found with id: "
+                        + updatedUser.getId()));
+
         user.setUsername(updatedUser.getUsername());
         user.setPassword(updatedUser.getPassword());
         UserDto userDto = userDtoConverter.converter(userRepository.save(user));
         return userDto;
     }
 
-    public void deleteOneUser(Long id){
+    public void deleteOneUser(Long id) {
         userRepository.deleteById(id);
     }
 }

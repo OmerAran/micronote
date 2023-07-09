@@ -25,9 +25,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessage>internalServerErrorException(Exception exception, WebRequest webRequest) {
         ErrorMessage errorMessage = new ErrorMessage(
-          HttpStatus.INTERNAL_SERVER_ERROR.value(),
-          new Date(),
-          exception.getMessage(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                new Date(),
+                exception.getMessage(),
                 webRequest.getDescription(false)
         );
         return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);

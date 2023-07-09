@@ -12,7 +12,7 @@ public class NoteDtoConverter {
         this.noteUserDtoConverter = noteUserDtoConverter;
     }
 
-    public NoteDto converter(Note from){
+    public NoteDto converter(Note from) {
         return new NoteDto(
                 from.getId(),
                 from.getContent(),

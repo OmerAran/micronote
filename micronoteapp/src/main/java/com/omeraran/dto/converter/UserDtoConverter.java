@@ -14,7 +14,7 @@ public class UserDtoConverter {
         this.userNoteDtoConverter = userNoteDtoConverter;
     }
 
-    public UserDto converter(User from){
+    public UserDto converter(User from) {
         return new UserDto(
                 from.getId(),
                 from.getUsername(),

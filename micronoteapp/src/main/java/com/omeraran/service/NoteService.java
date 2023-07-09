@@ -29,27 +29,28 @@ public class NoteService {
                 .collect(Collectors.toList());
         return noteDtos;
     }
-    public NoteDto getOneNote(Long id){
-       Note note = noteRepository.findById(id).orElseThrow(()->new RuntimeException("Note not found with id : " + id));
-       NoteDto noteDto = noteDtoConverter.converter(note);
-       return noteDto;
+
+    public NoteDto getOneNote(Long id) {
+        Note note = noteRepository.findById(id).orElseThrow(() -> new RuntimeException("Note not found with id : " + id));
+        NoteDto noteDto = noteDtoConverter.converter(note);
+        return noteDto;
     }
 
-    public NoteDto saveOneNote(Note note){
+    public NoteDto saveOneNote(Note note) {
         Note savedNote = noteRepository.save(note);
         NoteDto noteDto = noteDtoConverter.converter(savedNote);
         return noteDto;
     }
 
-    public NoteDto updateOneNote(Note updatedNote){
-        Note note = noteRepository.findById(updatedNote.getId()).orElseThrow(()->
+    public NoteDto updateOneNote(Note updatedNote) {
+        Note note = noteRepository.findById(updatedNote.getId()).orElseThrow(() ->
                 new RuntimeException("not found with id: " + updatedNote.getId()));
         note.setContent(updatedNote.getContent());
         NoteDto noteDto = noteDtoConverter.converter(noteRepository.save(note));
         return noteDto;
     }
 
-    public void deleteOneNote(Long id){
+    public void deleteOneNote(Long id) {
         noteRepository.deleteById(id);
     }
 
