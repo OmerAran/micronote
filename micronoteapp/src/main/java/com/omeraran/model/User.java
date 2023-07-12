@@ -1,7 +1,19 @@
 package com.omeraran.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+
+import lombok.Builder;
+import lombok.Data;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,8 +23,6 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "users")
@@ -29,6 +39,17 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Note> notes;
+
+    public User() {
+    }
+
+    public User(Long id, String username, String password, ERole role, Set<Note> notes) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.notes = notes;
+    }
 
     public Long getId() {
         return id;

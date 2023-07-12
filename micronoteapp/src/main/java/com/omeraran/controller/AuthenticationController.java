@@ -1,6 +1,5 @@
 package com.omeraran.controller;
 
-import com.omeraran.dto.UserDto;
 import com.omeraran.dto.auth.LoginRequest;
 import com.omeraran.dto.auth.UserResponse;
 import com.omeraran.model.User;

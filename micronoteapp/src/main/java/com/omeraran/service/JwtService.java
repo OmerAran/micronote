@@ -40,7 +40,8 @@ public class JwtService {
 
     public boolean tokenControl(String jwt, UserDetails userDetails) {
         final String username = findUsername(jwt);
-        return (username.equals(userDetails.getUsername()) && !exportToken(jwt, Claims::getExpiration).before(new Date()));
+        return username.equals(userDetails.getUsername())
+                && !exportToken(jwt, Claims::getExpiration).before(new Date());
     }
 
     public String generateToken(UserDetails user) {

@@ -5,10 +5,11 @@ import com.omeraran.dto.NoteDto;
 import com.omeraran.dto.converter.NoteDtoConverter;
 import com.omeraran.model.Note;
 import com.omeraran.repository.NoteRepository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class NoteService {
@@ -21,12 +22,9 @@ public class NoteService {
         this.noteDtoConverter = noteDtoConverter;
     }
 
-    public List<NoteDto> getAllNotes() {
-        List<Note> notes = noteRepository.findAll();
-        List<NoteDto> noteDtos = notes
-                .stream()
-                .map(noteDtoConverter::converter)
-                .collect(Collectors.toList());
+    public Page<NoteDto> getAllNotes(Pageable pageable) {
+        Page<Note> notes = noteRepository.findAll(pageable);
+        Page<NoteDto> noteDtos = noteDtoConverter.converter(notes);
         return noteDtos;
     }
 
