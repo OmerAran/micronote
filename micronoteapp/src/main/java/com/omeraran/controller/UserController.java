@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -25,27 +26,24 @@ public class UserController {
     }
 
     @GetMapping()
-    public List<UserDto> getAllUsers() {
-        List<UserDto> users = userService.getAllUsers();
-        return users;
+    public List<UserDto> getAllUsers(@RequestParam(defaultValue = "0") Integer pageNo,
+                                     @RequestParam(defaultValue = "10") Integer pageSize) {
+        return userService.getAllUsers(pageNo, pageSize);
     }
 
     @GetMapping("/{id}")
     public UserDto getOneUser(@PathVariable Long id) {
-        UserDto user = userService.getOneUser(id);
-        return user;
+        return userService.getOneUser(id);
     }
 
     @PostMapping("/add")
     public UserDto saveOneUser(@RequestBody User user) {
-        UserDto userDto = userService.saveOneUser(user);
-        return userDto;
+        return userService.saveOneUser(user);
     }
 
     @PutMapping("/edit")
     public UserDto updateOneUser(@RequestBody User user) {
-        UserDto updatedUser = userService.updateOneUser(user);
-        return updatedUser;
+        return userService.updateOneUser(user);
     }
 
     @DeleteMapping("/delete/{id}")

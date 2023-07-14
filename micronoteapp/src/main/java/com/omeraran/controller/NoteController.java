@@ -4,8 +4,6 @@ import com.omeraran.dto.NoteDto;
 import com.omeraran.model.Note;
 import com.omeraran.service.NoteService;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/note")
@@ -27,8 +27,9 @@ public class NoteController {
     }
 
     @GetMapping()
-    public Page<NoteDto> getAllUsers(Pageable pageable) {
-        Page<NoteDto> notes = noteService.getAllNotes(pageable);
+    public List<NoteDto> getAllUsers(@RequestParam(defaultValue = "0") Integer pageNo,
+                                     @RequestParam(defaultValue = "10") Integer pageSize) {
+        List<NoteDto> notes = noteService.getAllNotes(pageNo, pageSize);
         return notes;
     }
 

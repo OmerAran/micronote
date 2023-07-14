@@ -5,11 +5,14 @@ import com.omeraran.dto.converter.UserDtoConverter;
 import com.omeraran.exception.UserNotFoundException;
 import com.omeraran.model.User;
 import com.omeraran.repository.UserRepository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -30,24 +33,19 @@ public class UserService {
         User user = userRepository
                 .findById(id)
                 .orElseThrow(() -> new UserNotFoundException("[getOneUser] user not found with id: " + id));
-        UserDto userDto = userDtoConverter.converter(user);
-        return userDto;
+        return userDtoConverter.converter(user);
     }
 
-    public List<UserDto> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        List<UserDto> userDtos = users
-                .stream()
-                .map(userDtoConverter::converter)
-                .collect(Collectors.toList());
-        return userDtos;
+    public List<UserDto> getAllUsers(Integer pageNo, Integer pageSize) {
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Page<User> users = userRepository.findAll(paging);
+        return userDtoConverter.converter(users.getContent());
     }
 
     public UserDto saveOneUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
-        UserDto userDto = userDtoConverter.converter(savedUser);
-        return userDto;
+        return userDtoConverter.converter(savedUser);
     }
 
     public UserDto updateOneUser(User updatedUser) {
@@ -59,8 +57,7 @@ public class UserService {
 
         user.setUsername(updatedUser.getUsername());
         user.setPassword(updatedUser.getPassword());
-        UserDto userDto = userDtoConverter.converter(userRepository.save(user));
-        return userDto;
+        return userDtoConverter.converter(userRepository.save(user));
     }
 
     public void deleteOneUser(Long id) {

@@ -26,7 +26,10 @@ public class NoteDtoConverter {
     }
 
     public List<NoteDto> converter(List<Note> from) {
-        return from.stream().map(x -> converter(x)).collect(Collectors.toList());
+        return from
+                .stream()
+                .map(this::converter)
+                .collect(Collectors.toList());
     }
 
     public Page<NoteDto> converter(Page<Note> notes) {
