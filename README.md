@@ -1,11 +1,11 @@
 # micronote project
 
 # last added features
-1.Spring Security with Jwt Authentication
-2.Dto and its Converters
-3.Custom Exception
-4.Checkstyle - check if convenient to coding standard
-5.Pagination - to list users and notes
+1.Spring Security with Jwt Authentication<br>
+2.Dto and its Converters<br>
+3.Custom Exception<br>
+4.Checkstyle - check if convenient to coding standard<br>
+5.Pagination - to list users and notes<br><br>
 
 This project is about taking notes. There is two type objects named user and note.
 I have tried to write an API which has relaitons between objects. I decided to write an app that i need one.
