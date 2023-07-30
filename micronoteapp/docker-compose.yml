@@ -1,0 +1,23 @@
+version: '3.1'
+services:
+  app:
+    container_name: micronoteapp
+    image: micronoteapp
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/micronotedb
+        - SPRING_DATASOURCE_USERNAME=postgres
+        - SPRING_DATASOURCE_PASSWORD=12345
+        - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=micronotedb
