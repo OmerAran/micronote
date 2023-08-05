@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class NoteService {
 
@@ -43,9 +42,10 @@ public class NoteService {
 
     public NoteDto updateOneNote(Note updatedNote) {
         Note note = noteRepository.findById(updatedNote.getId()).orElseThrow(() ->
-                new RuntimeException("not found with id: " + updatedNote.getId()));
+                    new RuntimeException("not found with id: " + updatedNote.getId()));
         note.setContent(updatedNote.getContent());
-        return noteDtoConverter.converter(noteRepository.save(note));
+        return noteDtoConverter.converter(
+                noteRepository.save(note));
     }
 
     public void deleteOneNote(Long id) {
