@@ -23,14 +23,14 @@ I have experienced RestAPI development, how to work with relationships between e
 
 
 ```http
-  POST  localhost:8081/api/v1/user/add
+  POST  localhost:8081/api/v1/user
 ```
 | Parameter | Type (request body)     | Description                |
 | :-------- | :------- | :------------------------- |
 | `body` | `User` | **Required**.|
 
 ```http
-  PUT localhost:8081/api/v1/user/edit
+  PUT localhost:8081/api/v1/user
 ```
 
 | Parameter | Type     | Description                       |
@@ -47,7 +47,7 @@ I have experienced RestAPI development, how to work with relationships between e
 ```
 
 ```http
-  DELETE localhost:8081/api/v1/user/delete/{id}
+  DELETE localhost:8081/api/v1/user/{id}
 ```
 
 | Parameter | Type     | Description                       |
